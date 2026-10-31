@@ -1,39 +1,129 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de contraseñas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para ti</title>
+<style>
+  :root {
+    --fondo: #ffe0ec;
+    --tarjeta: #ffffff;
+    --texto: #4a2a35;
+    --acento: #e0457b;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --fondo: #2a1620;
+      --tarjeta: #3a1f2c;
+      --texto: #ffe3ec;
+      --acento: #ff7aa8;
+    }
+  }
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: Georgia, serif;
+    text-align: center;
+  }
+  section {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 32px 20px;
+    animation: aparecer 1s ease both;
+  }
+  h1, h2 { color: var(--acento); }
+  @keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+  .tarjeta {
+    background: var(--tarjeta);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 16px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  button {
+    background: var(--acento);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  #mensaje { margin-top: 16px; font-size: 1.2rem; min-height: 2em; }
+  .carta {
+    background: var(--tarjeta);
+    border-left: 4px solid var(--acento);
+    border-radius: 8px;
+    padding: 24px 20px;
+    text-align: left;
+    line-height: 1.7;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .corazon {
+    position: fixed;
+    bottom: 0;
+    font-size: 2rem;
+    animation: subir 2s linear forwards;
+    pointer-events: none;
+  }
+  @keyframes subir {
+    to { transform: translateY(-100vh); opacity: 0; }
+  }
+</style>
 </head>
-
 <body>
 
-    <h1>Generador de contraseñas</h1>
-  <label>Longitud:</label>
-<input type="number" id="longitud" value="12" min="4" max="32">
-    
-  <button>generar contraseñas</button>
-   <p></p>
-  
-  <script>
-    const boton = document.querySelector("button");
-const resultado = document.querySelector
-("p");
-    const longitud = document.querySelector("#longitud");
-  
-    boton.addEventListener("click", function() {
-  const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-let contraseña = "";
+<section>
+  <h1>Para mi chikistrikis 💕</h1>
+  <p>Hice esta página solo para ti.</p>
+</section>
 
-for (let i = 0; i < longitud.value; i++) {
-    contraseña += caracteres[Math.floor(Math.random() * caracteres.length)];
-}
+<section>
+  <h2>Por qué te quiero</h2>
+  <div class="tarjeta">Tu sonrisa me arregla el día.</div>
+  <div class="tarjeta">Contigo hasta lo aburrido es divertido.</div>
+  <div class="tarjeta">Eres mi persona favorita.</div>
+</section>
 
-resultado.textContent = contraseña;
-});
-    
-  </script>
+<section>
+  <h2>Una carta para ti</h2>
+  <div class="carta">
+    <p>Gracias por darme esa carta. Me gustas mucho, esa carta me hace sentir especial aunque no lo soy realmente. Hice esto y no está tan bueno, pero estoy empezando. Pero ME GUSTAS MUCHO, TE AMO.</p>
+    <p>Para la otra te hago una mucho más buena, apenas ando empezando xd</p>
+  </div>
+</section>
+
+<section>
+  <h2>Una sorpresa</h2>
+  <button onclick="sorpresa()">Toca aquí 💌</button>
+  <p id="mensaje"></p>
+</section>
+
+<script>
+  const mensajes = [
+    "Te amo 💖"
+  ];
+  function sorpresa() {
+    const i = Math.floor(Math.random() * mensajes.length);
+    document.getElementById("mensaje").textContent = mensajes[i];
+
+    for (let n = 0; n < 12; n++) {
+      const c = document.createElement("div");
+      c.className = "corazon";
+      c.textContent = "💖";
+      c.style.left = Math.random() * 90 + "vw";
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 2000);
+    }
+  }
+</script>
 
 </body>
 </html>
-  
